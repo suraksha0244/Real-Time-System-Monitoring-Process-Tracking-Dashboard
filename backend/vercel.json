@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "system_metrics.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "system_metrics.py"
+        }
+    ]
+}
