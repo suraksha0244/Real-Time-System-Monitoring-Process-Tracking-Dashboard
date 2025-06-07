@@ -1,170 +1,142 @@
-# System Monitoring Dashboard
 
-This full-stack project provides a real-time system monitoring dashboard. The application displays live system metrics—such as CPU usage (overall and per-core), memory usage, disk usage, and network statistics—using a FastAPI backend and a React/Next.js frontend. The backend streams metrics via Server-Sent Events (SSE) to be consumed and visualized by the frontend.
+# 📊 Real-Time System Monitoring & Process Tracking Dashboard
 
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Frontend Setup](#frontend-setup)
-  - [Getting Started](#getting-started-frontend)
-  - [Folder Structure](#frontend-folder-structure)
-- [Backend Setup](#backend-setup)
-  - [Getting Started](#getting-started-backend)
-  - [Project Structure](#backend-project-structure)
+A full-stack real-time system monitoring dashboard designed to track system performance and running processes, inspired by the Windows Task Manager. Built as part of a SOC internship project, it offers accurate, live system metrics including CPU usage, memory, disk usage, network speed, and per-process CPU details — streamed to a modern frontend.
 
 ---
 
-## Overview
+## 📑 Table of Contents
 
-The System Monitoring Dashboard is divided into two main components:
-
-1. **Frontend:**  
-   A React/Next.js application that consumes real-time metrics from the backend and displays them using dynamic charts and responsive UI components.
-   
-2. **Backend:**  
-   A FastAPI application that collects system metrics using [psutil](https://github.com/giampaolo/psutil) and [speedtest-cli](https://pypi.org/project/speedtest-cli/), streaming the data via SSE. It also includes CORS support to allow communication with the frontend.
-
----
-
-## Features
-
-- **Real-Time Monitoring:**  
-  Live updates of system metrics via SSE.
-- **Dynamic Data Visualization:**  
-  Interactive charts for CPU and per-core usage.
-- **Responsive Design:**  
-  A mobile-first, responsive UI built with Next.js and Tailwind CSS.
-- **Dark/Light Mode:**  
-  Toggle between dark and light themes.
-- **Robust Error Handling:**  
-  Provides default values (e.g., network speed as 0) when errors occur (e.g., HTTP 403).
-- **Backend Metrics Collection:**  
-  Gathers CPU, memory, disk, and network metrics using industry-standard libraries.
+- [📖 Project Overview](#-project-overview)
+- [🚀 Features](#-features)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [📈 Backend Implementation Phases](#-backend-implementation-phases)
+- [📊 Demo](#-demo)
+- [📦 Project Setup](#-project-setup)
+  - [Frontend Setup](#frontend-setup)
+  - [Backend Setup](#backend-setup)
+- [📎 Next Steps](#-next-steps)
 
 ---
 
-## Technologies Used
+## 📖 Project Overview
 
-### Frontend
-- [React](https://reactjs.org/)
-- [Next.js](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- Custom UI Components (Card, Tabs, Chart, Progress, etc.)
-- [lucide-react](https://lucide.dev/) for icons
+As part of the Security Operations Center (SOC) track, we (a team of 2) were assigned to build a **System Monitoring Dashboard**.
 
-### Backend
-- [Python](https://www.python.org/) (v3.9+)
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Uvicorn](https://www.uvicorn.org/)
-- [psutil](https://github.com/giampaolo/psutil)
-- [speedtest-cli](https://pypi.org/project/speedtest-cli/)
-- FastAPI CORS Middleware
+**Objectives:**
+- Real-time system metrics display:
+  - CPU usage (overall & per-core)
+  - Memory usage
+  - Disk usage
+  - Network speed (Download/Upload/Ping)
+  - Running process details (name, CPU usage)
+- Emphasis on accuracy and real-time updates
+- Mimic the Windows Task Manager functionality
+- Enable live metric streaming to a modern frontend interface
 
 ---
 
-## Frontend Setup
+## 🚀 Features
 
-### Getting Started (Frontend)
-
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/Shreyashs98/SOC_TOR_INTERNSHIP_25.git
-   cd frontend
-   ```
-
-2. **Install Dependencies:**
-
-   Using npm:
-   ```bash
-   npm install
-   ```
-   or using yarn:
-   ```bash
-   yarn install
-   ```
-
-3. **Configuration:**
-
-   The frontend connects to the FastAPI backend's SSE endpoint at `http://127.0.0.1:8123/metrics`. Update the endpoint in `app/page.tsx` if your backend is hosted elsewhere.
-
-4. **Running the Application:**
-
-   Start the development server with:
-   ```bash
-   npm run dev
-   ```
-   or
-   ```bash
-   yarn dev
-   ```
-
-   Then open your browser and navigate to [http://localhost:3000](http://localhost:3000) to view the dashboard.
+- 📊 **Real-Time Monitoring:** Continuous live updates via Server-Sent Events (SSE)
+- 📉 **Dynamic Data Visualization:** Responsive, interactive charts and metric cards
+- 📱 **Mobile-Friendly UI:** Built with Tailwind CSS and Next.js
+- 🌙 **Dark/Light Mode Toggle**
+- ⚙️ **Accurate Process Tracking:** CPU usage by processes via PowerShell integration
+- 🛡️ **Cross-Platform Compatibility:** Windows/Linux support
+- 🐍 **Robust Error Handling:** Default values returned on errors (e.g., HTTP 403)
 
 ---
 
-## Backend Setup
+## 🛠️ Technology Stack
 
-### Getting Started (Backend)
+### 🔙 Backend:
+- **Language:** Python 3.9+
+- **Framework:** FastAPI
+- **Libraries/Tools:**
+  - `psutil` — System metrics collection
+  - `speedtest-cli` — Network speed tests
+  - `subprocess` — PowerShell integration
+  - `asyncio`, `uvicorn`, `logging` — Async tasks and debugging
+  - FastAPI CORS middleware — Frontend-backend integration
+  - `StreamingResponse` — Real-time SSE streaming
 
-1. **Clone the Repository:**
+### 🔜 Frontend:
+- **Framework:** React (Next.js)
+- **Styling:** Tailwind CSS
+- **Language:** TypeScript
+- **Tools:**
+  - Custom UI Components (Cards, Tabs, Progress Bars)
+  - `lucide-react` icons
 
-   ```bash
-   git clone https://github.com/Shreyashs98/SOC_TOR_INTERNSHIP_25.git
-   cd backend
-   ```
+---
 
-2. **Create and Activate a Virtual Environment:**
+## 📈 Backend Implementation Phases
 
-   On macOS/Linux:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-   On Windows:
-   ```bash
-   python -m venv venv
-   .\venv\Scripts\activate
-   ```
+**Phase 1:**  
+Terminal-based metrics collection via `psutil` and `speedtest`
 
-3. **Install Dependencies:**
+**Phase 2:**  
+API-based system monitoring using FastAPI endpoints for:
+- `/cpu`
+- `/memory`
+- `/disk`
+- `/network`
 
-   If you have a `requirements.txt` file:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   Otherwise, install the necessary packages manually:
-   ```bash
-   pip install fastapi uvicorn psutil speedtest-cli
-   ```
+**Phase 3:**  
+Integrated CPU process monitoring via PowerShell (`Get-Process | Select Name, CPU`)
 
-### Running the Server
+**Phase 4:**  
+Real-time streaming using FastAPI's `StreamingResponse` and SSE:
+- `/metrics` — System metrics stream
+- `/cpu-processes` — Process details stream
 
-Start the FastAPI server using Uvicorn:
+✔️ Resolved Windows/Linux path issues  
+✔️ Matched metrics with Task Manager for higher accuracy  
+
+**Optimization Note:**  
+Initially explored a Flask-based polling approach for process data — later replaced by SSE due to polling's inefficiency, higher latency, and increased server load.
+
+---
+
+## 📊 Demo
+
+▶️ [📺 Click here to watch the demo](https://drive.google.com/file/d/1ugOHzbIH6faRnB-N0TNWeuVGBIwK1ZUg/view?usp=drive_link)
+
+---
+
+## 📦 Project Setup
+
+### Frontend Setup
 
 ```bash
+git clone https://github.com/Shreyashs98/SOC_TOR_INTERNSHIP_25.git
+cd frontend
+npm install    # or yarn install
+npm run dev    # or yarn dev
+````
+
+Access at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+### Backend Setup
+
+```bash
+git clone https://github.com/Shreyashs98/SOC_TOR_INTERNSHIP_25.git
+cd backend
+python -m venv venv
+.\venv\Scripts\activate   # Windows
+pip install -r requirements.txt
 uvicorn system_metrics:app --reload
 ```
 
-This runs the server on [http://127.0.0.1:8123](http://127.0.0.1:8123) with hot-reloading enabled for development.
-
-### Backend Project Structure
-
-```plaintext
-backend/
-├── system_metrics.py    # Main FastAPI application streaming system metrics
-├── requirements.txt     # Python dependencies (if provided)
-└── README.md            # This file
-```
-
-### CORS Configuration
-
-The backend uses FastAPI’s CORS middleware to allow requests from the frontend (typically at `http://localhost:3000`). Modify the `origins` list in `system_metrics.py` if your frontend is hosted at a different origin.
+Backend runs at: [http://127.0.0.1:8123](http://127.0.0.1:8123)
 
 ---
 
+## 📎 Next Steps
+
+This System Monitoring Dashboard was integrated with the **Threat Detection Team's network capture tool** for comprehensive monitoring, analysis, and visualization.
+
+---
