@@ -1,0 +1,38 @@
+.chart-container {
+    width: 100%;
+    position: relative;
+    /* Fallback height in case JavaScript isn't loaded */
+    height: 50vh;
+  }
+  
+  .chart-tooltip {
+    position: absolute;
+    left: var(--tooltip-left, 0px);
+    top: var(--tooltip-top, 0px);
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 1000;
+  }
+  
+  .chart-tooltip-label {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #4a5568;
+  }
+  
+  .chart-tooltip-value {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #1a202c;
+  }
+  
+  .chart-tooltip-extra {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #718096;
+  }
+  
