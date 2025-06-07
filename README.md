@@ -104,36 +104,75 @@ Initially explored a Flask-based polling approach for process data — later rep
 ▶️ [📺 Click here to watch the demo](https://drive.google.com/file/d/1ugOHzbIH6faRnB-N0TNWeuVGBIwK1ZUg/view?usp=drive_link)
 
 ---
-
+---
 ## 📦 Project Setup
+## ⚙️ Backend Setup
 
-### Frontend Setup
+1. **Clone the Repository**
 
-```bash
-git clone https://github.com/Shreyashs98/SOC_TOR_INTERNSHIP_25.git
-cd frontend
-npm install    # or yarn install
-npm run dev    # or yarn dev
-````
+   ```bash
+   git clone <repo_url>
+   cd backend
+   ```
 
-Access at: [http://localhost:3000](http://localhost:3000)
+2. **Create and Activate a Virtual Environment**
+
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate  # Windows
+   source venv/bin/activate  # macOS/Linux
+   ```
+
+3. **Install Dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the FastAPI Server**
+
+   ```bash
+   uvicorn system_metrics:app --reload
+   ```
+
+   Backend runs on: [http://127.0.0.1:8123](http://127.0.0.1:8123)
 
 ---
 
-### Backend Setup
+## 🖥️ Frontend Setup
 
-```bash
-git clone https://github.com/Shreyashs98/SOC_TOR_INTERNSHIP_25.git
-cd backend
-python -m venv venv
-.\venv\Scripts\activate   # Windows
-pip install -r requirements.txt
-uvicorn system_metrics:app --reload
-```
+1. **Clone the Repository**
 
-Backend runs at: [http://127.0.0.1:8123](http://127.0.0.1:8123)
+   ```bash
+   git clone <repo_url>
+   cd frontend
+   ```
+
+2. **Install Dependencies using pnpm**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Configure Backend SSE Endpoint**
+   In `app/page.tsx`, set:
+
+   ```ts
+   const backendUrl = "http://127.0.0.1:8123/metrics"
+   ```
+
+4. **Run the Frontend**
+
+   ```bash
+   pnpm dev
+   ```
+
+   Frontend runs on: [http://localhost:3000](http://localhost:3000)
 
 ---
+
+
+
 
 ## 📎 Next Steps
 
